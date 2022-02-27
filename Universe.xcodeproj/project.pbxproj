@@ -13,6 +13,7 @@
 		4D407DA427C852C000E0CF7B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D407DA327C852C000E0CF7B /* Preview Assets.xcassets */; };
 		4D407DA627C852C000E0CF7B /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D407DA527C852C000E0CF7B /* Persistence.swift */; };
 		4D407DA927C852C000E0CF7B /* Universe.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4D407DA727C852C000E0CF7B /* Universe.xcdatamodeld */; };
+		4D7549F527CB2649005B7138 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7549F427CB2649005B7138 /* DetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		4D407DA327C852C000E0CF7B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4D407DA527C852C000E0CF7B /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		4D407DA827C852C000E0CF7B /* Universe.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Universe.xcdatamodel; sourceTree = "<group>"; };
+		4D7549F427CB2649005B7138 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 			children = (
 				4D407D9C27C852BD00E0CF7B /* UniverseApp.swift */,
 				4D407D9E27C852BD00E0CF7B /* ContentView.swift */,
+				4D7549F427CB2649005B7138 /* DetailView.swift */,
 				4D407DA027C852C000E0CF7B /* Assets.xcassets */,
 				4D407DA527C852C000E0CF7B /* Persistence.swift */,
 				4D407DA727C852C000E0CF7B /* Universe.xcdatamodeld */,
@@ -146,6 +149,7 @@
 				4D407DA627C852C000E0CF7B /* Persistence.swift in Sources */,
 				4D407D9F27C852BD00E0CF7B /* ContentView.swift in Sources */,
 				4D407DA927C852C000E0CF7B /* Universe.xcdatamodeld in Sources */,
+				4D7549F527CB2649005B7138 /* DetailView.swift in Sources */,
 				4D407D9D27C852BD00E0CF7B /* UniverseApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

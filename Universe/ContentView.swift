@@ -10,54 +10,92 @@ import CoreData
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    @State private var title: String = ""
+    @State private var information: String = ""
+    @FocusState private var isFocused: Bool
 
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
+        entity: Item.entity(), sortDescriptors: [NSSortDescriptor(key: "title", ascending: false)], animation: .default)
     private var items: FetchedResults<Item>
 
     var body: some View {
         NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
-                    }
+            VStack {
+                TextField("Title", text: $title)
+                    .textFieldStyle(.roundedBorder)
+                    .focused($isFocused)
+                TextEditor(text: $information)
+                /*TextField("Information", text: $information)
+                    .textFieldStyle(.roundedBorder)
+                */
+                
+                Button("Add") {
+                    addItem()
+                    clean()
+                    isFocused = true
                 }
-                .onDelete(perform: deleteItems)
+                .padding(10)
+                .frame(maxWidth: 200.0)
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .clipShape(RoundedRectangle(cornerRadius: 10.0, style: .continuous))
+                
+                List {
+                    ForEach(items) { item in
+                        NavigationLink {
+                            DetailView(title: item.title!, information: item.information!)
+                        } label: {
+                            HStack {
+                                Text(item.title ?? "")
+                                Spacer()
+                                Image(systemName: item.isFavorite ? "heart.fill": "heart")
+                                    .foregroundColor(.red)
+                                    .onTapGesture {
+                                        updateItem(item)
+                                    }
+                            }
+                        }
+                    }.onDelete(perform: deleteItems)
+                }
+            
+                Spacer()
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-            Text("Select an item")
+            .padding()
+            .navigationTitle("All Topics")
         }
     }
 
+// MARK: - Función de agregar
+    
     private func addItem() {
         withAnimation {
             let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
+            newItem.title = title
+            newItem.information = information
 
             do {
                 try viewContext.save()
             } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 let nsError = error as NSError
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
         }
     }
+    
+// MARK: - Función de favorito
+    
+    private func updateItem(_ item: Item) {
+        item.isFavorite = !item.isFavorite
+        
+        do {
+            try viewContext.save()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
 
+// MARK: - Función de borrar
+    
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             offsets.map { items[$0] }.forEach(viewContext.delete)
@@ -65,24 +103,23 @@ struct ContentView: View {
             do {
                 try viewContext.save()
             } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 let nsError = error as NSError
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
         }
     }
+    
+// MARK: - Función limpiar campos
+    
+    private func clean() {
+        title = ""
+        information = ""
+    }
 }
-
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        let persistedContainer = PersistenceController.shared.persistentContainer
+        ContentView().environment(\.managedObjectContext, persistedContainer.viewContext)
     }
 }
