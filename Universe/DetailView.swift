@@ -19,10 +19,12 @@ struct DetailView: View {
                     .foregroundColor(.primary)
                     .bold()
                     .lineSpacing(8.0)
+                    .padding()
                 
                 Spacer()
                 
                 Text(information)
+                    .padding()
                     .lineSpacing(8.0)
             }
             .padding()

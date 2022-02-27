@@ -9,6 +9,10 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
+    init() {
+        UITextView.appearance().backgroundColor = .clear
+    }
+    
     @Environment(\.managedObjectContext) private var viewContext
     @State private var title: String = ""
     @State private var information: String = ""
@@ -22,23 +26,30 @@ struct ContentView: View {
         NavigationView {
             VStack {
                 TextField("Title", text: $title)
-                    .textFieldStyle(.roundedBorder)
+                    .padding()
+                    .background(Color(.secondarySystemBackground))
+                    //.textFieldStyle(.roundedBorder)
+                    .cornerRadius(15)
                     .focused($isFocused)
                 TextEditor(text: $information)
-                /*TextField("Information", text: $information)
-                    .textFieldStyle(.roundedBorder)
-                */
+                    .padding()
+                    .background(Color(.secondarySystemBackground))
+                    //.background(Color.gray.opacity(0.125))
+                    .cornerRadius(15)
                 
-                Button("Add") {
+                Button(action: {
                     addItem()
                     clean()
                     isFocused = true
-                }
-                .padding(10)
-                .frame(maxWidth: 200.0)
-                .background(Color.blue)
-                .foregroundColor(.white)
-                .clipShape(RoundedRectangle(cornerRadius: 10.0, style: .continuous))
+                }, label:  {
+                    Text("Add")
+                        .padding()
+                        .font(.headline)
+                        .frame(maxWidth: 200.0, maxHeight: 50.0)
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(15.0)
+                })
                 
                 List {
                     ForEach(items) { item in
@@ -57,6 +68,8 @@ struct ContentView: View {
                         }
                     }.onDelete(perform: deleteItems)
                 }
+                .background(Color(.secondarySystemBackground))
+                .cornerRadius(15.0)
             
                 Spacer()
             }
