@@ -15,6 +15,7 @@
 		4D407DA627C852C000E0CF7B /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D407DA527C852C000E0CF7B /* Persistence.swift */; };
 		4D407DA927C852C000E0CF7B /* Universe.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4D407DA727C852C000E0CF7B /* Universe.xcdatamodeld */; };
 		4D7549F527CB2649005B7138 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7549F427CB2649005B7138 /* DetailView.swift */; };
+		4D77B2BD27CD41A300C47A9D /* NewItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D77B2BC27CD41A300C47A9D /* NewItemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		4D407DA527C852C000E0CF7B /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		4D407DA827C852C000E0CF7B /* Universe.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Universe.xcdatamodel; sourceTree = "<group>"; };
 		4D7549F427CB2649005B7138 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		4D77B2BC27CD41A300C47A9D /* NewItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				4D407D9C27C852BD00E0CF7B /* UniverseApp.swift */,
 				4D407D9E27C852BD00E0CF7B /* ContentView.swift */,
 				4D7549F427CB2649005B7138 /* DetailView.swift */,
+				4D77B2BC27CD41A300C47A9D /* NewItemView.swift */,
 				4D1270EE27CC2FD800BC1C44 /* ImagePicker.swift */,
 				4D407DA027C852C000E0CF7B /* Assets.xcassets */,
 				4D407DA527C852C000E0CF7B /* Persistence.swift */,
@@ -151,6 +154,7 @@
 			files = (
 				4D407DA627C852C000E0CF7B /* Persistence.swift in Sources */,
 				4D407D9F27C852BD00E0CF7B /* ContentView.swift in Sources */,
+				4D77B2BD27CD41A300C47A9D /* NewItemView.swift in Sources */,
 				4D407DA927C852C000E0CF7B /* Universe.xcdatamodeld in Sources */,
 				4D1270EF27CC2FD800BC1C44 /* ImagePicker.swift in Sources */,
 				4D7549F527CB2649005B7138 /* DetailView.swift in Sources */,

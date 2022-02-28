@@ -6,25 +6,25 @@
 //
 
 import SwiftUI
-import Combine
 
 struct ImagePicker: UIViewControllerRepresentable {
     @Binding var show: Bool
     @Binding var image: Data
+    var sourceType: UIImagePickerController.SourceType = .photoLibrary
+    
+    func makeCoordinator() -> ImagePicker.Coordinator {
+        return ImagePicker.Coordinator(child1: self)
+    }
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
         let picker = UIImagePickerController()
-        picker.sourceType = .photoLibrary
+        picker.sourceType = sourceType
         picker.delegate = context.coordinator
         return picker
     }
     
     func updateUIViewController(_ uiViewController: UIImagePickerController, context: UIViewControllerRepresentableContext<ImagePicker>) {
         
-    }
-    
-    func makeCoordinator() -> ImagePicker.Coordinator {
-        return ImagePicker.Coordinator(child1: self)
     }
     
     class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {

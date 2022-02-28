@@ -14,50 +14,36 @@ struct ContentView: View {
     }
     
     @Environment(\.managedObjectContext) private var viewContext
+    
     @State private var title: String = ""
     @State private var information: String = ""
-    @FocusState private var isFocused: Bool
+    @State private var image: Data = .init(count: 0)
+    @State private var show: Bool = false
 
-    @FetchRequest(
-        entity: Item.entity(), sortDescriptors: [NSSortDescriptor(key: "title", ascending: false)], animation: .default)
+    @FetchRequest(entity: Item.entity(), sortDescriptors: [
+            NSSortDescriptor(key: "title", ascending: true),
+            NSSortDescriptor(key: "information", ascending: false),
+            NSSortDescriptor(key: "isFavorite", ascending: false),
+            NSSortDescriptor(key: "imageD", ascending: false)], animation: .default)
     private var items: FetchedResults<Item>
 
     var body: some View {
         NavigationView {
             VStack {
-                TextField("Title", text: $title)
-                    .padding()
-                    .background(Color(.secondarySystemBackground))
-                    //.textFieldStyle(.roundedBorder)
-                    .cornerRadius(15)
-                    .focused($isFocused)
-                TextEditor(text: $information)
-                    .padding()
-                    .background(Color(.secondarySystemBackground))
-                    //.background(Color.gray.opacity(0.125))
-                    .cornerRadius(15)
-                
-                Button(action: {
-                    addItem()
-                    clean()
-                    isFocused = true
-                }, label:  {
-                    Text("Add")
-                        .padding()
-                        .font(.headline)
-                        .frame(maxWidth: 200.0, maxHeight: 50.0)
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(15.0)
-                })
-                
                 List {
-                    ForEach(items) { item in
+                    ForEach(items, id: \.self) { item in
                         NavigationLink {
-                            DetailView(title: item.title!, information: item.information!)
+                            DetailView(title: item.title!, information: item.information!, image: item.imageD!)
                         } label: {
                             HStack {
+                                Image(uiImage: UIImage(data: item.imageD ?? self.image)!)
+                                    .resizable()
+                                    .frame(width: 50, height: 50)
+                                    .clipShape(Circle())
+                                    .overlay(Circle().stroke(Color.gray, lineWidth: 2))
                                 Text(item.title ?? "")
+                                    .bold()
+                                    .font(.headline)
                                 Spacer()
                                 Image(systemName: item.isFavorite ? "heart.fill": "heart")
                                     .foregroundColor(.red)
@@ -70,12 +56,23 @@ struct ContentView: View {
                 }
                 .background(Color(.secondarySystemBackground))
                 .cornerRadius(15.0)
-            
+                
                 Spacer()
             }
             .padding()
             .navigationTitle("All Topics")
+            .navigationBarItems(trailing: Button(action: {
+                self.show.toggle()
+            }) {
+                HStack {
+                    Image(systemName: "plus.circle.fill")
+                    Text("Create new")
+                }
+            })
         }
+        .sheet(isPresented: self.$show, content: {
+            NewItemView().environment(\.managedObjectContext, self.viewContext)
+        })
     }
 
 // MARK: - Función de agregar

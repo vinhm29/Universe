@@ -10,10 +10,21 @@ import SwiftUI
 struct DetailView: View {
     var title: String
     var information: String
+    var image: Data
     
     var body: some View {
         ScrollView {
             VStack {
+                Image(uiImage: UIImage(data: image)!)
+                    .renderingMode(.original)
+                    .resizable()
+                    .frame(width: UIScreen.main.bounds.width-32, height: 250)
+                    .clipShape(Rectangle())
+                    .cornerRadius(15)
+                    .shadow(radius: 5)
+                
+                Spacer()
+                
                 Text(title)
                     .font(.title)
                     .foregroundColor(.primary)
@@ -29,7 +40,7 @@ struct DetailView: View {
             }
             .padding()
         }
-        .navigationTitle(title)
+        //.navigationTitle(title)
         .navigationBarTitleDisplayMode(.inline)
     }
 }
