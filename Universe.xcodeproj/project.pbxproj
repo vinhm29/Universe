@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D1270EF27CC2FD800BC1C44 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1270EE27CC2FD800BC1C44 /* ImagePicker.swift */; };
 		4D407D9D27C852BD00E0CF7B /* UniverseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D407D9C27C852BD00E0CF7B /* UniverseApp.swift */; };
 		4D407D9F27C852BD00E0CF7B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D407D9E27C852BD00E0CF7B /* ContentView.swift */; };
 		4D407DA127C852C000E0CF7B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D407DA027C852C000E0CF7B /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4D1270EE27CC2FD800BC1C44 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		4D407D9927C852BD00E0CF7B /* Universe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Universe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D407D9C27C852BD00E0CF7B /* UniverseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniverseApp.swift; sourceTree = "<group>"; };
 		4D407D9E27C852BD00E0CF7B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 				4D407D9C27C852BD00E0CF7B /* UniverseApp.swift */,
 				4D407D9E27C852BD00E0CF7B /* ContentView.swift */,
 				4D7549F427CB2649005B7138 /* DetailView.swift */,
+				4D1270EE27CC2FD800BC1C44 /* ImagePicker.swift */,
 				4D407DA027C852C000E0CF7B /* Assets.xcassets */,
 				4D407DA527C852C000E0CF7B /* Persistence.swift */,
 				4D407DA727C852C000E0CF7B /* Universe.xcdatamodeld */,
@@ -149,6 +152,7 @@
 				4D407DA627C852C000E0CF7B /* Persistence.swift in Sources */,
 				4D407D9F27C852BD00E0CF7B /* ContentView.swift in Sources */,
 				4D407DA927C852C000E0CF7B /* Universe.xcdatamodeld in Sources */,
+				4D1270EF27CC2FD800BC1C44 /* ImagePicker.swift in Sources */,
 				4D7549F527CB2649005B7138 /* DetailView.swift in Sources */,
 				4D407D9D27C852BD00E0CF7B /* UniverseApp.swift in Sources */,
 			);
