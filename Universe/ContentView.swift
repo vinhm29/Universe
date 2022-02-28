@@ -63,12 +63,12 @@ struct ContentView: View {
             .navigationTitle("All Topics")
             .navigationBarItems(trailing: Button(action: {
                 self.show.toggle()
-            }) {
+            }, label: {
                 HStack {
                     Image(systemName: "plus.circle.fill")
                     Text("Create new")
                 }
-            })
+            }))
         }
         .sheet(isPresented: self.$show, content: {
             NewItemView().environment(\.managedObjectContext, self.viewContext)
