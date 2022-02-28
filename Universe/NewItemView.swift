@@ -22,23 +22,23 @@ struct NewItemView: View {
                 if image.count != 0 {
                     Button(action: {
                         show.toggle()
-                    }) {
+                    }, label: {
                         Image(uiImage: UIImage(data: image)!)
                             .renderingMode(.original)
                             .resizable()
                             .frame(width: 200, height: 200)
                             .clipShape(Rectangle())
-                    }
+                    })
                 } else {
                     Button(action: {
                         show.toggle()
-                    }) {
+                    }, label: {
                         Image(systemName: "person.circle.fill")
                             .resizable()
                             .font(.largeTitle)
                             .frame(width: 200, height: 200)
                             .clipShape(Rectangle())
-                    }
+                    })
                 }
                 
                 TextField("Title", text: $title)
@@ -68,7 +68,7 @@ struct NewItemView: View {
                     self.image.count = 0
                     
                     //self.dismiss.wrappedValue.dismiss()
-                }) {
+                }, label: {
                     Text("Add")
                         .padding()
                         .font(.headline)
@@ -76,7 +76,7 @@ struct NewItemView: View {
                         .background(Color.blue)
                         .foregroundColor(.white)
                         .cornerRadius(15.0)
-                }
+                })
                 /*Button(action: {
                     addItem()
                     clean()
@@ -94,11 +94,11 @@ struct NewItemView: View {
             .padding()
             .navigationBarItems(leading: Button(action: {
                 self.dismiss.wrappedValue.dismiss()
-            }){
+            }, label:{
                 Text("Cancel")
                     .bold()
                     .foregroundColor(.blue)
-            })
+            }))
         }
         .sheet(isPresented: self.$show, content: {
             ImagePicker(show: self.$show, image: self.$image)
