@@ -61,14 +61,18 @@ struct ContentView: View {
             }
             .padding()
             .navigationTitle("All Topics")
-            .navigationBarItems(trailing: Button(action: {
-                self.show.toggle()
-            }, label: {
-                HStack {
-                    Image(systemName: "plus.circle.fill")
-                    Text("Create new")
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Button(action: {
+                        self.show.toggle()
+                    }, label: {
+                        HStack {
+                            Image(systemName: "plus.circle.fill")
+                            Text("Create new")
+                        }
+                    })
                 }
-            }))
+            }
         }
         .sheet(isPresented: self.$show, content: {
             NewItemView().environment(\.managedObjectContext, self.viewContext)
@@ -117,13 +121,6 @@ struct ContentView: View {
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
         }
-    }
-    
-// MARK: - Función limpiar campos
-    
-    private func clean() {
-        title = ""
-        information = ""
     }
 }
 

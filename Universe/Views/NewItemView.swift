@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NewItemView: View {
     @Environment(\.managedObjectContext) var item
-    @Environment(\.presentationMode) var dismiss
+    @Environment(\.presentationMode) var mode
     
     @State private var title: String = ""
     @State private var information: String = ""
@@ -44,13 +44,10 @@ struct NewItemView: View {
                 TextField("Title", text: $title)
                     .padding()
                     .background(Color(.secondarySystemBackground))
-                    //.textFieldStyle(.roundedBorder)
                     .cornerRadius(15)
-                    //.focused($isFocused)
                 TextEditor(text: $information)
                     .padding()
                     .background(Color(.secondarySystemBackground))
-                    //.background(Color.gray.opacity(0.125))
                     .cornerRadius(15)
                 
                 Button(action: {
@@ -62,43 +59,35 @@ struct NewItemView: View {
                     // Guardar la info permanente
                     try! self.item.save()
                     
+                    self.mode.wrappedValue.dismiss()
+                    
                     // Limpiar los campos después de realizar el clic
                     self.title = ""
                     self.information = ""
                     self.image.count = 0
-                    
-                    //self.dismiss.wrappedValue.dismiss()
                 }, label: {
                     Text("Add")
                         .padding()
-                        .font(.headline)
-                        .frame(maxWidth: 200.0, maxHeight: 50.0)
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(15.0)
-                })
-                /*Button(action: {
-                    addItem()
-                    clean()
-                    isFocused = true
-                }, label:  {
-                    Text("Add")
-                        .padding()
-                        .font(.headline)
-                        .frame(maxWidth: 200.0, maxHeight: 50.0)
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(15.0)
-                })*/
+                }).font(.headline)
+                    .foregroundColor(.white)
+                    .frame(maxWidth: 200.0, maxHeight: 50.0)
+                    .disabled(self.title.count > 4 && self.information.count > 8 && self.image.count != 0 ? false : true)
+                    .background(self.title.count > 4 && self.information.count > 8 && self.image.count != 0 ? Color.blue : Color.gray)
+                    .cornerRadius(15.0)
             }
             .padding()
-            .navigationBarItems(leading: Button(action: {
-                self.dismiss.wrappedValue.dismiss()
-            }, label:{
-                Text("Cancel")
-                    .bold()
-                    .foregroundColor(.blue)
-            }))
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button(action: {
+                        self.mode.wrappedValue.dismiss()
+                    }, label: {
+                        HStack {
+                            Image(systemName: "xmark.circle")
+                            Text("Cancel")
+                        }
+                    })
+                }
+            }
         }
         .sheet(isPresented: self.$show, content: {
             ImagePicker(show: self.$show, image: self.$image)
